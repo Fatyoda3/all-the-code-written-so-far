@@ -1,4 +1,4 @@
-function getHCF(number1, number2) {
+const getHCF = (number1, number2) => {
   if (Math.min(number1, number2) === 0) {
     return Math.max(number1, number2);
   }

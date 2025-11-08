@@ -1,13 +1,10 @@
-function checkIfLeapYear(year) {
-  const check1 = year % 4 === 0;
-  const check2 = year % 100 === 0;
-  const check3 = year % 400 === 0;
-  const isLeapYear = check2 ? check3 : check1;
-  return isLeapYear
-}
+const isFactor = (divisor, dividend) => dividend % divisor === 0;
+const isLeap = (year) =>
+  isFactor(100, year) ? isFactor(400, year) : isFactor(4, year);
+
 
 function testLeapYearFunction(value, expectedValue) {
-  const valueWeGot = checkIfLeapYear(value);
+  const valueWeGot = isLeap(value);
   const exp = valueWeGot === expectedValue ? '✅' : '❌';
   const message = valueWeGot ? 'it is leap year' : 'it fails';
   console.log(message, exp, value, valueWeGot, ':', expectedValue);
