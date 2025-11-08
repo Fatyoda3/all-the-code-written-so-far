@@ -1,23 +1,23 @@
-function isInvalid ( firstNumber, secondNumber)
-{
-  if (firstNumber === 0 || secondNumber === 0) {
-    return firstNumber === 0 ? secondNumber : firstNumber;
+function getHCF(dividend1, dividend2) {
+
+  if (Math.min(dividend1, dividend2) === 0) {
+    return Math.max(dividend1, dividend2);
   }
-}
 
-function getHCF(firstNumber, secondNumber) {
-  if(isInvalid(firstNumber , secondNumber)) 
-    return isInvalid(firstNumber , secondNumber);
-  let a = firstNumber;
-  let b = secondNumber;
+  let a = dividend1;
+  let b = dividend2;
 
-  while (a && b) {
+  while (a !== 0 && b !== 0) {
+    let delta = a;
+
     if (a > b) {
-      a = a - b;
-    } else {
-      b = b - a;
+      a -= b;
+      delta = 0;
     }
+    b -= delta;
+
   }
+
   return a;
 }
 
@@ -33,6 +33,7 @@ function testHCF(n1, n2, expectedValue) {
 
 function testAll() {
   testHCF(10, 100, 10);
+  testHCF(100, 10, 10);
   testHCF(100, 100, 100);
   testHCF(50, 100, 50);
   testHCF(20, 100, 20);
