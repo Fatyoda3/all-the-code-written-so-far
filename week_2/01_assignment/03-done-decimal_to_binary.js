@@ -1,16 +1,17 @@
-function decimalToBinary(decimalNum) {
-  if (decimalNum <= 0)
-    return decimalNum.toString();
+function decimalToBinary(number) {
+  if (number <= 0) {
+    return `${number}`;
+  }
 
   const reverse = [];
 
-  while (decimalNum > 0) {
-    const remainder = decimalNum % 2;
-    decimalNum = (decimalNum - remainder) / 2;
+  while (number > 0) {
+    const remainder = number % 2;
+    number = (number - remainder) / 2;
     reverse.push(remainder);
   }
-  return reverse.join('');
 
+  return reverse.join('');
 }
 const color = (text, code) => `\x1B[38;5;${code}m${text}\x1B[0m`;
 const bold = text => `\x1B[1m${text}\x1B[0m`;
