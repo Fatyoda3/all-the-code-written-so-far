@@ -1,6 +1,6 @@
 function decimalToBinary(decimalNum) {
   if (decimalNum <= 0)
-    return decimalNum.toString('');
+    return decimalNum.toString();
 
   const reverse = [];
 
