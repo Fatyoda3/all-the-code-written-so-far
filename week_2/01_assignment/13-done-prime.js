@@ -1,12 +1,14 @@
 const isDivisible = (n, i) => n % i === 0;
 
-const isPrime = (number) => {
-  if (number < 2) {
+const isPrime = (assumedPrime) => {
+  if (assumedPrime < 2) {
     return false;
   }
+  const root = Math.sqrt(assumedPrime);
 
-  for (let i = 2; i < Math.sqrt(number); i++) {
-    if (isDivisible(number, i)) {
+  for (let divisor = 2; divisor < root; divisor++) {
+
+    if (isDivisible(assumedPrime, divisor)) {
       return false;
     }
   }
