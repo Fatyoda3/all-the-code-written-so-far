@@ -1,6 +1,4 @@
-function isWhiteSpace(char) {
-  return char === ' ' || char === '\n' || char === '\t';
-}
+const isWhiteSpace = (char) => [' ', '\n', '\t'].includes(char);
 
 function trim(sentence) {
   let finalText = '';
