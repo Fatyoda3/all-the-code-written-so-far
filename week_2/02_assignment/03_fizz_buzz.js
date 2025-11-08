@@ -1,5 +1,5 @@
-function isDivisibleBy(number, divisor) {
-  return !(number % divisor)
+function isDivisible(number, divisor) {
+  return (number % divisor === 0);
 }
 
 function fizzBuzz(number) {
@@ -8,8 +8,8 @@ function fizzBuzz(number) {
   const fb = f + b;
   let count = 0;
 
-  count = isDivisibleBy(number, 3) ? count + 1 : count;
-  count = isDivisibleBy(number, 5) ? count + 2 : count;
+  count = isDivisible(number, 3) ? count + 1 : count;
+  count = isDivisible(number, 5) ? count + 2 : count;
 
   switch (count) {
     case 0:
@@ -30,7 +30,7 @@ function testFizzBuzz(string, expectedValue) {
   const isWorking = valueWeGot === expectedValue ? '✅' : '❌';
   const part2 = expectedValue + " and we got " + valueWeGot;
   const message = isWorking + " value we expected " + part2;
-  
+
   console.log(message);
 }
 

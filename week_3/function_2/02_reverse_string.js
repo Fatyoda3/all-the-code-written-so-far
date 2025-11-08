@@ -1,11 +1,11 @@
 function reverseString(sentence) {
-  let reversed = '';
+  const reversed = [];
 
-  for (let index = sentence.length - 1; index >= 0; index--) {
-    reversed += sentence[index];
+  for (let index = sentence.length - 1; index > -1; index--) {
+    reversed.push(sentence[index]);
   }
 
-  return reversed;
+  return reversed.join('');
 }
 
 function testRevString(string, expectedValue) {

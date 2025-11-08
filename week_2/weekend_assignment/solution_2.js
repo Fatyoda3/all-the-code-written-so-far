@@ -6,7 +6,6 @@ function leastDistance(string) {
   let distance = string.length;
 
   for (let index = 0; index < string.length; index++) {
-
     const isCurrentVowel = isVowel(string[index]);
 
     if (isCurrentVowel && isLastVowel) {
@@ -16,6 +15,7 @@ function leastDistance(string) {
       isLastVowel = isCurrentVowel;
       lastVowelIdx = index;
     }
+
   }
 
   return distance === string.length ? -1 : distance;

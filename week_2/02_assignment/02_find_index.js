@@ -4,6 +4,7 @@ function findIndex(text, target) {
       return index;
     }
   }
+
   return -1;
 }
 

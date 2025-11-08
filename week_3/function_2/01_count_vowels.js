@@ -1,20 +1,12 @@
-function isVowel(letter) {
-  const vowels = 'aeEiouAIOU';
-
-  for (let index = 0; index < vowels.length; index++) {
-    if (vowels[index] === letter) {
-      return true;
-    }
-  }
-  return false;
-}
+const isVowel = (letter) => 'aeEiouAIOU'.includes(letter);
 
 function countVowels(sentence) {
   let count = 0;
 
   for (let index = 0; index < sentence.length; index++) {
-    const isLetterVowel = isVowel(sentence[index]);
-    count = isLetterVowel ? count + 1 : count;
+    if (isVowel(sentence[index])) {
+      count += 1;
+    }
   }
 
   return count;

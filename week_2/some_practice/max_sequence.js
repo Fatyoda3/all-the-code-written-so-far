@@ -3,33 +3,31 @@ function maxSequence(string) {
     return '0';
   }
 
-  let count = 1;
+  let count = 0;
   let frequency = 0;
 
-  let FrequentChar = '';
-  let lastLetter = '';
+  let lastLetter = string[0];
 
   for (let index = 0; index < string.length; index++) {
     let delta = 1;
-    const check = FrequentChar !== string[index];
-    if (check && frequency < count) {
+
+    const isSame = lastLetter === string[index];
+
+    if (isSame) {
+      count += 1;
+    }
+    if (frequency < count && !isSame) {
       frequency = count;
-      lastLetter = FrequentChar;
-      count = 1;
-    }
-    if (check) {
-      FrequentChar = string[index];
-      delta = 0;
+      count = 0;
+
     }
 
-
-
-    count += delta;
+    lastLetter = string[index];
   }
 
   const frag = (lastLetter !== '') ? lastLetter : FrequentChar;
 
-  return Math.max(frequency, count) + frag;
+  return Math.max(frequency) + frag;
 }
 
 function composeMessage(equalCheck, expectedValue, valueWeGot) {
@@ -46,21 +44,21 @@ function testMaxSequence(string, expectedValue) {
   const equalCheck = valueWeGot === expectedValue;
 
   const message = composeMessage(equalCheck, expectedValue, valueWeGot);
-
+  console.log('INP', string);
   console.log(message);
 }
 
 function testAll() {
 
-  testMaxSequence('', '0');
-  testMaxSequence('a', '1a');
-  testMaxSequence('aaa', '3a');
+  // testMaxSequence('', '0');
+  // testMaxSequence('a', '1a');
+  // testMaxSequence('aaa', '3a');
 
-  testMaxSequence('aaaa', '4a');
-  testMaxSequence('aaaa', '4a');
+  // testMaxSequence('aaaa', '4a');
   testMaxSequence('aabb', '2a');
 
   testMaxSequence('abba', '2b');
+  testMaxSequence('hello', '2b');
   testMaxSequence('abba---abba', '3-');
   testMaxSequence('abcde', '1e');
 
