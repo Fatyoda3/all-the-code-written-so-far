@@ -1,7 +1,7 @@
 const isVowel = letter => 'aeiou'.includes(letter);
 
 function leastDistance(string) {
-  let secondVowel = false;
+  let isLastVowel = false;
   let lastVowelIdx = 0;
   let distance = string.length;
 
@@ -9,16 +9,12 @@ function leastDistance(string) {
 
     const isCurrentVowel = isVowel(string[index]);
 
+    if (isCurrentVowel && isLastVowel) {
+      distance = Math.min(distance, index - lastVowelIdx);
+    }
     if (isCurrentVowel) {
-
-      const difference = index - lastVowelIdx;
-      const isMinDistance = distance > difference;
-
-      if (isMinDistance && secondVowel) {
-        distance = difference;
-      }
+      isLastVowel = isCurrentVowel;
       lastVowelIdx = index;
-      secondVowel = true;
     }
   }
 
