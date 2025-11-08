@@ -1,20 +1,22 @@
-function printEvenSeries(start, end) {
+const findBounds = (start, end) => {
   const startOffset = start % 2;
   const endOffset = end % 2;
-  let actualStart = start + startOffset;
-  let actualEnd = end - endOffset;
 
-  if (end < start) {
-    actualStart = end + endOffset;
-    actualEnd = start - startOffset;
+  if (start < end) {
+    return [start + startOffset, end - endOffset];
   }
 
-  const evenNumbers = [];
+  return [end + endOffset, start - startOffset];
+}
+
+const evensInRange = (start, end) => {
+  const [actualStart, actualEnd] = findBounds(start, end);
+  const evens = [];
 
   for (let term = actualStart; term <= actualEnd; term += 2) {
-    evenNumbers.push(term);
+    evens.push(term);
   }
-  return evenNumbers.join(' ');
+  return evens.join(' ');
 }
 
 const color = (text, code) => `\x1B[38;5;${code}m${text}\x1B[0m`;
@@ -39,14 +41,13 @@ const tester = (fnToTest, input, expected, intent) => {
   console.log(message);
 }
 const testAll = (fn) => {
-  tester(fn, [1, 10], '2 4 6 8 10');
-  tester(fn, [1, 10], '2 4 6 8 10');
-  tester(fn, [3, 10], '4 6 8 10');
-  tester(fn, [-4, -12], '-12 -10 -8 -6 -4');
-  tester(fn, [-4, -2], '-4 -2');
-  tester(fn, [10, 3], '4 6 8 10');//failed but now passes    
+  tester(fn, [2, 10], '2 4 6 8 10', 'basic inbound');
+  tester(fn, [1, 10], '2 4 6 8 10', 'need to offset start');
+  tester(fn, [-4, -12], '-12 -10 -8 -6 -4', 'negative + swap(start, end)');
+  tester(fn, [-4, -2], '-4 -2', 'start and end return');
+  tester(fn, [10, 3], '4 6 8 10', 'trivial but good');//failed but now passes    
 
 }
 
-testAll(printEvenSeries);
+testAll(evensInRange);
 
