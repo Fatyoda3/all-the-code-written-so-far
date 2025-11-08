@@ -15,7 +15,6 @@ function findPrimeFactors(number) {
     }
 
     divisor += delta;
-
   }
 
   return factors.join(' ');
