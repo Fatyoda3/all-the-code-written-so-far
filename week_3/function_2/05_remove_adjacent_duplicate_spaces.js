@@ -1,25 +1,17 @@
-function isWhiteSpace(letter) { }
-
-function removeAdjacentDuplicateSpaces(sentence) {
+const removeAdjacentDuplicateSpaces = (sentence) => {
   if (sentence === '') {
     return '';
   }
-
-  let edited = '';
-  let isLastLetter = false;
+  const edited = [];
+  let isPrevLetter = true;
 
   for (let index = 0; index < sentence.length; index++) {
-    const letter = sentence[index];
-    const isLetter = letter !== ' ';
-    if (isLetter) {
-      edited += letter;
-    } else if (isLastLetter) {
-      edited += ' ';
-    }
-    isLastLetter = letter;
+
+
+
   }
 
-  return edited;
+  return edited.join('');
 }
 
 function testRemove(input, expectedValue) {

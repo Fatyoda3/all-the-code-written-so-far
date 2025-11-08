@@ -1,57 +1,26 @@
-function mapValue(letter, source, target) {
-  for (let position = 0; position < 26; position++) {
-    if (letter === source[position]) {
-      return target[position];
-    }
-  }
-  return letter;
-}
-
-function toUpperCase(letter) {
-  const capitalLetter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lowerCaseLetter = 'abcdefghijklmnopqrstuvwxyz';
-  return mapValue(letter, lowerCaseLetter, capitalLetter)
-}
-
-function toLowerCase(letter) {
-  const capitalLetter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lowerCaseLetter = 'abcdefghijklmnopqrstuvwxyz';
-  return mapValue(letter, capitalLetter, lowerCaseLetter)
-}
-
-function findInitial(sentence) {
-  for (let charIndex = 0; charIndex < sentence.length; charIndex++) {
-    if (sentence[charIndex] !== '_') {
-      return charIndex;
-    }
-  }
-  return -1;
-}
-
-function isChar_(character) {
-  return character !== '_';
-}
-
-function toCamelCase(sentence) {
+const findInitial = (text = '') => text.indexOf('_');
+const isChar_ = char => char === '_';
+function toCamelCase(sentence = '') {
   const indexOfInitial = findInitial(sentence);
 
   if (indexOfInitial === - 1) {
     return '';
   }
 
-  let camelText = toLowerCase(sentence[indexOfInitial]);
+  const camelText = [sentence[indexOfInitial].toLowerCase()];
   let isLastLetter = camelText;
 
   for (let index = indexOfInitial + 1; index < sentence.length; index++) {
     const char = sentence[index];
-    const isLetter = isChar_(char);
+    const isLetter = !isChar_(char);
 
     if (!isLastLetter && isLetter) {
-      camelText += toUpperCase(char);
+      camelText.push(char.toUpperCase());
     }
     else if (isLastLetter && isLetter) {
-      camelText += toLowerCase(char);
+      camelText.push(char.toLowerCase());
     }
+
     isLastLetter = isLetter;
   }
 
