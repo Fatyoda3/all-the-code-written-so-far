@@ -1,27 +1,38 @@
-function isPrime(n) {
-  if (n < 2) return false;
+const isDivisible = (n, i) => n % i === 0;
 
-  for (let i = 2; i < n; i++) {
-    if (n % i === 0) {
+const isPrime = (assumedPrime) => {
+  if (assumedPrime < 2) {
+    return false;
+  }
+
+  const root = Math.sqrt(assumedPrime);
+
+  for (let divisor = 2; divisor <= root; divisor++) {
+
+    if (isDivisible(assumedPrime, divisor)) {
       return false;
     }
   }
+
   return true;
 }
+const primeNotFound = (term) => !isPrime(term);
+function getPrimeAbove(prime) {
 
-function getPrimeAbove(n) {
-  let term = n + 1;
+  let term = prime + 1;
 
-  while (!isPrime(term)) {
-    term = term + 1;
+  while (primeNotFound(term)) {
+    term += 1;
   }
+
   return term;
 }
 
 function testGetPrimeAbove(value, expectedValue) {
   const valueWeGot = getPrimeAbove(value);
-  const exp = valueWeGot === expectedValue ? '✅' : '❌';
-  const message = valueWeGot ? 'it works' : 'it fails';
+  const works = valueWeGot === expectedValue
+  const exp = works ? '✅' : '❌';
+  const message = works ? 'it works' : 'it fails';
 
   console.log(message, exp, value, valueWeGot, ':', expectedValue);
 }
