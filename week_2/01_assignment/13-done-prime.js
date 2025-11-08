@@ -6,7 +6,7 @@ const isPrime = (assumedPrime) => {
   }
   const root = Math.sqrt(assumedPrime);
 
-  for (let divisor = 2; divisor < root; divisor++) {
+  for (let divisor = 2; divisor <= root; divisor++) {
 
     if (isDivisible(assumedPrime, divisor)) {
       return false;

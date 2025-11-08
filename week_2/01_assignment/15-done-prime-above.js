@@ -12,9 +12,9 @@ function isPrime(n) {
 function getPrimeAbove(n) {
   let term = n + 1;
 
-  while (!isPrime(term))
+  while (!isPrime(term)) {
     term = term + 1;
-
+  }
   return term;
 }
 
