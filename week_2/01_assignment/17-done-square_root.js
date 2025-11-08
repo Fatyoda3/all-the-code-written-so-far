@@ -1,18 +1,11 @@
-function getSquareRoot(a) {
-  return a ** 0.5;
-}
+const getSquareRoot = (a) => Math.sqrt(a);
 
-function isApprox(value, expectedValue) {
-  const delta = value - expectedValue;
-  if (delta < 0.1 && delta > -0.1) {
-    return true;
-  }
-  return false;
-}
+
+const isApprox = (delta) => delta < 0.1 && delta > -0.1;
 
 function testGetSquareRoot(value, expectedValue) {
   const valueWeGot = getSquareRoot(value);
-  const exp = isApprox(valueWeGot, expectedValue) ? '✅' : '❌';
+  const exp = isApprox(valueWeGot - expectedValue) ? '✅' : '❌';
   const message = valueWeGot ? 'it works' : 'it fails';
 
   console.log(message, exp, value, valueWeGot, ':', expectedValue);
