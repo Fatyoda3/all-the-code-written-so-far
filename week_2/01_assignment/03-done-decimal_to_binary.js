@@ -1,38 +1,44 @@
 function decimalToBinary(decimalNum) {
   if (decimalNum <= 0)
-    return decimalNum + '';
+    return decimalNum.toString('');
 
-  let str = '';
+  const reverse = [];
 
   while (decimalNum > 0) {
     const remainder = decimalNum % 2;
     decimalNum = (decimalNum - remainder) / 2;
-    str = str + remainder;
+    reverse.push(remainder);
   }
-  return str;
-  
-}
+  return reverse.join('');
 
-function testDecimalToBinary(value, expectedValue) {
-  const valueWeGot = decimalToBinary(value);
-  const isWorking =
-    valueWeGot === expectedValue ? '✅' : '❌';
-  const message = "value we expected " +
-    expectedValue + " and we got " +
-    valueWeGot + ' ' + isWorking;
+}
+const color = (text, code) => `\x1B[38;5;${code}m${text}\x1B[0m`;
+const bold = text => `\x1B[1m${text}\x1B[0m`;
+const fmtMsg = (input, output, expected, purpose = '') => {
+  const PrintError = output !== expected;
+  const symbol = PrintError ? "❌ " : "✅ ";
+  const message = [symbol, bold(purpose.toUpperCase())];
+
+  if (PrintError) {
+    const inpFrag = `INP -> ${color(input, 222)}`;
+    const expFrag = `EXP -> ${color(expected, 45)}`;
+    const outFrag = `OUT -> ${color(output, 196)}`;
+    message.push(`\n${inpFrag} \n${expFrag} \n${outFrag}\n`);
+  }
+
+  return color(message.join(""), 155);
+}
+const tester = (fnToTest, input, expected, intent) => {
+  const result = fnToTest(...input);
+  const message = fmtMsg(input, result, expected, intent);
   console.log(message);
-
 }
-function testCases() {
-  testDecimalToBinary(12, '0011');
-  testDecimalToBinary(8, '0001');
-  testDecimalToBinary(4, '001');
-  testDecimalToBinary(65, '1000001');
-  testDecimalToBinary(21, '10101');
-}
-
-function testAll() {
-  testCases();
+const testAll = (fn) => {
+  tester(fn, [12], '0011', 'basic tests');
+  tester(fn, [8], '0001', 'basic tests');
+  tester(fn, [4], '001', 'basic tests');
+  tester(fn, [65], '1000001', 'basic tests');
+  tester(fn, [21], '10101', 'basic tests');
 }
 
-testAll();
+testAll(decimalToBinary);

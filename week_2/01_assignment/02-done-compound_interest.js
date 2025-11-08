@@ -32,19 +32,14 @@ const fmtMsg = (input, output, expected, purpose = '') => {
 
   return color(message.join(""), 155);
 }
-
 const tester = (fnToTest, input, expected, intent) => {
   const result = fnToTest(...input);
   const message = fmtMsg(input, result, expected, intent);
   console.log(message);
 }
-
-
-
 const testAll = (fn) => {
   tester(fn, [PRINCIPAL, TIME, RATE], 21, 'basic');
   tester(fn, [100, 3, 10], 33.0, 'precision err');
   tester(fn, [PRINCIPAL, 4, 10], 46.41, 'no precision err');
 }
-
 testAll(compoundFor);
