@@ -1,10 +1,12 @@
 function printEvenSeries(start, end) {
-  let actualStart = start % 2 ? start + 1 : start;
-  let actualEnd = end;// bug is if end is like 1 then the code will fail all together
+  const startOffset = start % 2;
+  const endOffset = end % 2;
+  let actualStart = start + startOffset;
+  let actualEnd = end - endOffset;
 
-  if (start > end) {
-    actualStart = end;
-    actualEnd = start;
+  if (end < start) {
+    actualStart = end + endOffset;
+    actualEnd = start - startOffset;
   }
 
   const evenNumbers = [];
@@ -37,12 +39,12 @@ const tester = (fnToTest, input, expected, intent) => {
   console.log(message);
 }
 const testAll = (fn) => {
-  // tester(fn, [1, 10], '2 4 6 8 10 ');
-  // tester(fn, [1, 10], '2 4 6 8 10 ');
-  // tester(fn, [3, 10], '4 6 8 10 ');
-  // tester(fn, [-4, -12], '-12 -10 -8 -6 -4 ');
-  // tester(fn, [-4, -2], '-4 -2 ');
-  tester(fn, [10, 3], '4 6 8 10');//failed 
+  tester(fn, [1, 10], '2 4 6 8 10');
+  tester(fn, [1, 10], '2 4 6 8 10');
+  tester(fn, [3, 10], '4 6 8 10');
+  tester(fn, [-4, -12], '-12 -10 -8 -6 -4');
+  tester(fn, [-4, -2], '-4 -2');
+  tester(fn, [10, 3], '4 6 8 10');//failed but now passes    
 
 }
 
