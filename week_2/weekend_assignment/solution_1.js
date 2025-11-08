@@ -1,47 +1,31 @@
-function isVowel(letter) {
-  switch (letter) {
-    case 'a':
-    case 'e':
-    case 'i':
-    case 'o':
-    case 'u':
-      return true;
-  }
-  return false;
-}
+const isVowel = letter => 'aeiou'.includes(letter);
+const isAlternate = (current, last) => isVowel(current) !== isVowel(last);
 
-function isAlternate(current, last) {
-  return isVowel(current) !== isVowel(last);
-}
-
-function unusedLettersGen() {
-
-}
 function splitByVowel(string) {
-
   let remaining = string;
-  let alteredText = '';
+  const splitted = [];
 
   while (remaining !== '') {
+    const unused = [];
 
-    let unusedLetters = '';
-    let alteringWord = remaining[0];
+    let altering = [remaining[0]];
 
-    for (let current = 1; current < remaining.length; current++) {
-      const currentLetter = remaining[current];
-      const alteringLetter = alteringWord[alteringWord.length - 1];
-      if (isAlternate(currentLetter, alteringLetter)) {
-        alteringWord += currentLetter;
-      } else {
-        unusedLetters += currentLetter;
-      }
+    const len = remaining.length;
+
+    for (let index = 1; index < len; index++) {
+
+      const current = remaining[index];
+      const last = altering[altering.length - 1];
+
+      isAlternate(current, last) ? altering.push(current) : unused.push(current);
+
     }
 
-    alteredText += alteringWord + ',';
-    remaining = unusedLetters;
+    splitted.push(altering.join(''));
+    remaining = unused.join('');
   }
 
-  return alteredText;
+  return splitted.join(',') + ',';
 
 }
 
