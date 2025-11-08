@@ -1,37 +1,20 @@
-/* function isSameChar(string, substring, index, start) {
-  return string[index] === substring[index - start];
-} */
-function endsWith(string, substring) {
+const endsWith = (string, substring) => {
 
-  const start = string.length - substring.length;
-  
-  if (start < 0) return false;
+  const from = string.length - substring.length;
 
-  for (let index = start; index < string.length; index++) {
-    if (string[index] !== substring[index - start]) {
+  if (from < 0) {
+    return false;
+  }
+
+  for (let index = 0; index < substring.length; index++) {
+
+    if (string[from + index] !== substring[index]) {
       return false;
     }
   }
   return true;
 }
 
-/* 
-function endsWith(string, substring) {
-  if (substring.length > string.length) {
-    return false;
-  }
-
-  let strIndex = string.length - 1;
-  const end = substring.length - 1;
-
-  for (let index = end; index >= 0; index--) {
-    if (string[strIndex + index - end] !== substring[index]) {
-      //index - end is like strIndex -=1
-      return false;
-    }
-  }
-  return true;
-} */
 
 function testEndsWith(string, substring, expectedValue) {
   const valueWeGot = endsWith(string, substring);
