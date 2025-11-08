@@ -11,7 +11,7 @@ function findPrimeFactors(number) {
     if (remainder === 0) {
       factors.push(divisor);
       multiple = multiple / divisor;
-      delta = 0
+      delta = 0;
     }
 
     divisor += delta;
