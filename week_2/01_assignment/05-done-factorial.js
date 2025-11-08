@@ -1,15 +1,17 @@
-function factorial(n) {
+const factorial = (n) => {
   let product = 1;
-  for (let currentN = n; currentN > 1; currentN--)
-    product = product * currentN;
+
+  for (let term = 1; term < n + 1; term++) {
+    product *= term;
+  }
 
   return product;
 }
 
 function testFactorial(x, expectedValue) {
-  const emoji = factorial(x) === expectedValue ? '✅' : '❌';
-  const message = emoji === '✅' ? 'it works' : 'it fails';
-  console.log(message, emoji, factorial(x), ':', expectedValue);
+  const symbol = factorial(x) === expectedValue ? '✅' : '❌';
+  const message = symbol === '✅' ? 'it works' : 'it fails';
+  console.log(message, symbol, factorial(x), ':', expectedValue);
 }
 function testAll() {
   testFactorial(5, 120);
