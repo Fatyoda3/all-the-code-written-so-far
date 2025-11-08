@@ -20,7 +20,6 @@ const primeNotFound = (term) => !isPrime(term);
 function getPrimeAbove(prime) {
 
   let term = prime + 1;
-
   while (primeNotFound(term)) {
     term += 1;
   }
