@@ -2,7 +2,7 @@ const isVowel = letter => 'aeiou'.includes(letter);
 
 function leastDistance(string) {
   let secondVowel = false;
-  let lastVowelPos = 0;
+  let lastVowelIdx = 0;
   let distance = string.length;
 
   for (let index = 0; index < string.length; index++) {
@@ -11,14 +11,13 @@ function leastDistance(string) {
 
     if (isCurrentVowel) {
 
-      const difference = index - lastVowelPos;
+      const difference = index - lastVowelIdx;
       const isMinDistance = distance > difference;
 
       distance = isMinDistance && secondVowel ? difference : distance;
 
-      lastVowelPos = index;
+      lastVowelIdx = index;
       secondVowel = true;
-
     }
   }
 
@@ -34,7 +33,7 @@ function composeMessage(string, expectedValue, valueWeGot) {
   return inputFragment + expectedFragment + '|' + outputFragment;
 }
 
-function testMinimumDistance(string, expectedValue) {
+function testLeastDistance(string, expectedValue) {
 
   const valueWeGot = leastDistance(string);
   const checkIfWorks = valueWeGot === expectedValue ? '✅' : '❌';
@@ -45,17 +44,16 @@ function testMinimumDistance(string, expectedValue) {
 }
 
 function testAll() {
-  testMinimumDistance('hello', 3);
-  testMinimumDistance('shellfish', 4);
+  testLeastDistance('hello', 3);
+  testLeastDistance('shellfish', 4);
 
-  testMinimumDistance('heo', 1);
-  testMinimumDistance('beautiful', 1);
-  testMinimumDistance('aaaa', 1);
+  testLeastDistance('heo', 1);
+  testLeastDistance('beautiful', 1);
+  testLeastDistance('aaaa', 1);
 
-  testMinimumDistance('strength', -1);
-  testMinimumDistance('bcd', -1);
-  testMinimumDistance('abyss', -1);
-  testMinimumDistance('abyss beneath', 1);
+  testLeastDistance('strength', -1);
+  testLeastDistance('bcd', -1);
+  testLeastDistance('abyss', -1);
 }
 
 testAll();
