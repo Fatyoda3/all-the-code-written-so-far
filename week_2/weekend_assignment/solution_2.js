@@ -14,8 +14,9 @@ function leastDistance(string) {
       const difference = index - lastVowelIdx;
       const isMinDistance = distance > difference;
 
-      distance = isMinDistance && secondVowel ? difference : distance;
-
+      if (isMinDistance && secondVowel) {
+        distance = difference;
+      }
       lastVowelIdx = index;
       secondVowel = true;
     }
