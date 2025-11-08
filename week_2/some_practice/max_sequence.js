@@ -3,36 +3,34 @@ function maxSequence(string) {
     return '0';
   }
 
-  let currentCount = 1;
+  let count = 1;
   let frequency = 0;
 
+  let currentLetter = '';
   let lastLetter = '';
-  let hfLetter = '';
 
   for (let index = 0; index < string.length; index++) {
-    if (lastLetter !== string[index]) {
+    let delta = 1;
 
-      if (frequency < currentCount) {
-        frequency = currentCount;
-        hfLetter = lastLetter;
+    if (currentLetter !== string[index]) {
 
-        currentCount = 1;
+      if (frequency < count) {
+        frequency = count;
+        lastLetter = currentLetter;
 
+        count = 1;
       }
-      lastLetter = string[index];
 
+      currentLetter = string[index];
+      delta = 0;
     }
-    else {
-      currentCount = currentCount + 1;
-    }
+
+    count += delta;
   }
 
-  if (frequency < currentCount) {
-    frequency = currentCount;
-    currentCount = 1;
-  }
+  const frag = (lastLetter !== '') ? lastLetter : currentLetter;
 
-  return frequency + (hfLetter ? hfLetter : lastLetter);
+  return Math.max(frequency, count) + frag;
 }
 
 function composeMessage(equalCheck, expectedValue, valueWeGot) {
