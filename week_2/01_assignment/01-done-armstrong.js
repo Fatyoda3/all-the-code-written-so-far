@@ -1,35 +1,45 @@
-function getNumberOfDigits(number) {
+const digitCounter = (number) => {
+  let digits = number;
+  if (digits === 0) return 1;
   let digitCount = 0;
-  while (number) {
-    const remainder = (number % 10);
-    number = (number - remainder) / 10;
-    digitCount = digitCount + 1;
+
+  while (digits > 0) {
+    const remainder = (digits % 10);
+    digits = (digits - remainder) / 10;
+    digitCount += 1;
   }
+
   return digitCount;
 }
 
-function isArmstrong(armstrongCandidate) {
+const isArmstrong = (armstrongCandidate) => {
   let x = armstrongCandidate;
-  const power = getNumberOfDigits(x);
-  let sumOfDigitCubes = 0;
+  const power = digitCounter(x);
+  let sumOfCubes = 0;
 
   for (let term = 0; term < power; term++) {
-    const remainder = (x % 10);
-    sumOfDigitCubes = sumOfDigitCubes + remainder ** power;
+    const remainder = x % 10;
+    sumOfCubes += (remainder ** power);
     x = (x - remainder) / 10;
   }
-  return sumOfDigitCubes === armstrongCandidate;
+
+  return sumOfCubes === armstrongCandidate;
 }
-function testArmstrong(input, valueWeGot, expectedValue) {
-  const message = input + " was and value we expected " + expectedValue + " and we got " + valueWeGot;
-  console.log(message);
+function testArmstrong(input, output, expected) {
+  if (output !== expected) {
+    console.log(input + "|EXP" + expected + "|OUT " + output);
+    return;
+  }
+
+  console.log('All good', output);
 }
 function testAll() {
-  testArmstrong(1, isArmstrong(1), 1);
-  testArmstrong(2, isArmstrong(2), 2);
-  testArmstrong(3, isArmstrong(3), 3);
-  testArmstrong(153, isArmstrong(153), 153);
-  testArmstrong(9474, isArmstrong(9474), 9474);
+  testArmstrong(1, isArmstrong(1), true);
+  testArmstrong(2, isArmstrong(2), true);
+  testArmstrong(3, isArmstrong(3), true);
+  testArmstrong(153, isArmstrong(153), true);
+  testArmstrong(9474, isArmstrong(9474), true);
+  testArmstrong(123, isArmstrong(123), false);
 }
 
 testAll();

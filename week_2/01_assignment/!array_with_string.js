@@ -1,11 +1,11 @@
 let index = 0;
-function push(arr, value) {
+const push = (arr, value) => {
   arr = arr + index + '=' + value + ',';
-  index = index + 1;
+  index += 1;
   return arr;
 }
 
-function getValueAt(index, arr) {
+const getValueAt = (index, arr) => {
   if (index < 0) return undefined;
 
   let charIndex = 0;
@@ -41,4 +41,4 @@ arr = push(arr, '2');
 arr = push(arr, 'hi22');
 arr = push(arr, true);
 arr = push(arr, "true");
-console.log(true === getValueAt(4, arr) );
+console.log(true === getValueAt(4, arr));
