@@ -1,14 +1,16 @@
-const hasFactor = (n, i) => n % i === 0;
+const isDivisible = (n, i) => n % i === 0;
 
 const isPrime = (number) => {
-  if (number < 2) return false;
+  if (number < 2) {
+    return false;
+  }
 
-  for (let i = 2; i < number; i++) {
-    if (hasFactor(number, i)) {
+  for (let i = 2; i < Math.sqrt(number); i++) {
+    if (isDivisible(number, i)) {
       return false;
     }
   }
-  //every pattern found 
+
   return true;
 }
 
