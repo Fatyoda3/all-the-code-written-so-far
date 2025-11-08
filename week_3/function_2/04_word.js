@@ -1,23 +1,24 @@
-function isWhiteSpace(char) {
-  return char === ' ' || char === '\n' || char === '\t';
-}
-
+const isSpace = char => (' ' === char);
 function countWords(sentence) {
   let count = 0;
-  let currentWord = '';
+
+  let letterFound = false;
+  let isLastSpace = false;
 
   for (let index = 0; index < sentence.length; index++) {
     const letter = sentence[index];
-    const isChar = !isWhiteSpace(letter);
+    const res = isSpace(letter);
 
-    if (isChar) {
-      currentWord += letter;
-    } else if (currentWord !== '') {
+    if (!res) {
+      letterFound = true;
+      isLastSpace = false;
+    }
+    if (letterFound && res && !isLastSpace) {
+      isLastSpace = true;
       count += 1;
-      currentWord = '';
     }
   }
-  return currentWord !== '' ? count + 1 : count;
+  return count;
 }
 
 function testCountWords(input, expectedValue) {
@@ -31,8 +32,10 @@ function testCountWords(input, expectedValue) {
 }
 
 function testAll() {
-  testCountWords(' red is blue', 3);
+  testCountWords(' red is ', 2);
   testCountWords(' red is blue  ', 3);
+  testCountWords(' red is   blue  ', 3);
+  testCountWords(' red    is blue  ', 3);
 }
 
 testAll();

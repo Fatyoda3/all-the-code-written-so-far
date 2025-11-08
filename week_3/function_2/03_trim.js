@@ -10,6 +10,7 @@ function trim(text = '') {
 
     isFSpace = isSpace(text[front]);
     isRSpace = isSpace(text[rear]);
+
     if (isFSpace) {
       front++;
     }
