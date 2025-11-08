@@ -3,19 +3,15 @@ function lcmOf(num1, num2) {
     return 0;
   }
 
-  let assumedLCM = Math.max(num1, num2);
+  let lcm = Math.max(num1, num2);
   const divisor = Math.min(num2, num1);
-  const incrementBy = assumedLCM;
+  const factor = lcm;
 
-  let check = (assumedLCM % divisor !== 0);
-
-  while (check) {
-    check = (assumedLCM % divisor !== 0);
-    if (check) {
-      assumedLCM = assumedLCM + incrementBy;
-    }
+  while ((lcm % divisor) !== 0) {
+    lcm += factor;
   }
-  return assumedLCM;
+
+  return lcm;
 }
 
 function testLCM(value, expectedValue) {
