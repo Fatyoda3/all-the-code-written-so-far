@@ -1,24 +1,23 @@
-function getHCF(dividend1, dividend2) {
-
-  if (Math.min(dividend1, dividend2) === 0) {
-    return Math.max(dividend1, dividend2);
+function getHCF(number1, number2) {
+  if (Math.min(number1, number2) === 0) {
+    return Math.max(number1, number2);
   }
 
-  let a = dividend1;
-  let b = dividend2;
+  let hcf = number1;
+  let dividend = number2;
 
-  while (a !== 0 && b !== 0) {
-    let delta = a;
+  while (hcf !== 0 && dividend !== 0) {
+    let delta = hcf;
 
-    if (a > b) {
-      a -= b;
+    if (hcf > dividend) {
+      hcf -= dividend;
       delta = 0;
     }
-    b -= delta;
 
+    dividend -= delta;
   }
 
-  return a;
+  return hcf;
 }
 
 function testHCF(n1, n2, expectedValue) {
