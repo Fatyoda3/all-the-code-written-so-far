@@ -1,6 +1,4 @@
 const getSquareRoot = (a) => Math.sqrt(a);
-
-
 const isApprox = (delta) => delta < 0.1 && delta > -0.1;
 
 function testGetSquareRoot(value, expectedValue) {
