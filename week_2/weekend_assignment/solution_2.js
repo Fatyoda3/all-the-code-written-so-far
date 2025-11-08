@@ -1,17 +1,6 @@
-function isVowel(letter) {
+const isVowel = letter => 'aeiou'.includes(letter);
 
-  switch (letter) {
-    case 'a':
-    case 'e':
-    case 'i':
-    case 'o':
-    case 'u':
-      return true;
-  }
-  return false;
-}
-
-function minimumDistance(string) {
+function leastDistance(string) {
   let secondVowel = false;
   let lastVowelPos = 0;
   let distance = string.length;
@@ -47,7 +36,7 @@ function composeMessage(string, expectedValue, valueWeGot) {
 
 function testMinimumDistance(string, expectedValue) {
 
-  const valueWeGot = minimumDistance(string);
+  const valueWeGot = leastDistance(string);
   const checkIfWorks = valueWeGot === expectedValue ? '✅' : '❌';
   const message = composeMessage(string, expectedValue, valueWeGot);
 
