@@ -35,10 +35,11 @@ const tester = (fnToTest, input, expected, intent) => {
 }
 const testAll = (fn) => {
   tester(fn, [12], '0011', 'basic tests');
-  tester(fn, [8], '0001', 'basic tests');
-  tester(fn, [4], '001', 'basic tests');
-  tester(fn, [65], '1000001', 'basic tests');
-  tester(fn, [21], '10101', 'basic tests');
+  tester(fn, [4], '001', 'trail is 1');
+  tester(fn, [65], '1000001', 'trail and lead are 1');
+  tester(fn, [21], '10101', 'a mix of 01 ');
+  tester(fn, [-31], '-31', 'negative');
+  tester(fn, [0], '0', 'zero');
 }
 
 testAll(decimalToBinary);
