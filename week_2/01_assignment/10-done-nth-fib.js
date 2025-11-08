@@ -1,21 +1,23 @@
 function fibonacciAt(n) {
-  let a = 0;
-  let b = 1;
-  let c = 0;
+  let currentTerm = 0;
+  let nextTerm = 1;
+  let futureTerm = 0;
 
-  for (let i = 1; i < n; i++) {
-    c = a + b;
-    a = b;
-    b = c;
+  for (let term = 1; term < n; term++) {
+    futureTerm = currentTerm + nextTerm;
+
+    currentTerm = nextTerm;
+    nextTerm = futureTerm;
   }
-  return a;
+  return currentTerm;
 }
 
-function testFibonacciAt(value, expectedValue) {
-  const valueWeGot = fibonacciAt(value);
-  const exp = valueWeGot === expectedValue ? '✅' : '❌';
-  const message = valueWeGot ? 'it works' : 'it fails';
-  console.log(message, exp, valueWeGot, ':', expectedValue);
+function testFibonacciAt(value, expected) {
+  const output = fibonacciAt(value);
+  const works = output === expected
+  const exp = works ? '✅' : '❌';
+  const message = works ? 'it works' : 'it fails';
+  console.log(message, exp, 'OUT', output, ':', expected);
 
 }
 
