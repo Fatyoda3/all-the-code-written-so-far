@@ -1,42 +1,50 @@
-const p = 100;
-const t = 2;
-const r = 10;
+const PRINCIPAL = 100;
+const TIME = 2;
+const RATE = 10;
 
-let amount = p;
-function interestPerYear(amount, r) {
-  return amount * (r / 100);
+const percentOf = (amount, rate) => amount * (rate / 100);
+
+const compoundFor = (principal, time, rate) => {
+  let total = principal;
+
+  for (let term = 0; term < time; term++) {
+    total += percentOf(total, rate);
+  }//reducer pattern detected;
+
+  return (total - principal);
 }
 
-function getCompound(x, t, r) {
-  let amount = x;
+const color = (text, code) => `\x1B[38;5;${code}m${text}\x1B[0m`;
+const bold = text => `\x1B[1m${text}\x1B[0m`;
+const isApprox = delta => - 0.1 < delta && delta < 0.1;
 
-  for (let currentYear = 0; currentYear < t; currentYear++) {
-    amount = amount + interestPerYear(amount, r);
+const fmtMsg = (input, output, expected, purpose = '') => {
+  const PrintError = !isApprox(output - expected);
+  const symbol = PrintError ? "❌ " : "✅ ";
+  const message = [symbol, bold(purpose.toUpperCase())];
+
+  if (PrintError) {
+    const inpFrag = `INP -> ${color(input, 222)}`;
+    const expFrag = `EXP -> ${color(expected, 45)}`;
+    const outFrag = `OUT -> ${color(output, 196)}`;
+    message.push(`\n${inpFrag} \n${expFrag} \n${outFrag}\n`);
   }
 
-  return amount - x;
+  return color(message.join(""), 155);
 }
 
-
-function testApSum(amount, t, r, expectedValue) {
-  const valueWeGot = getCompound(amount, t, r);
-  let isWorking = '';
-  let delta = (expectedValue - valueWeGot);
-  if (-0.9 < delta && delta < 0.9)
-    isWorking = '✅';
-  else if (delta === 0)
-    isWorking = '✅';
-  else isWorking = '❌';
-  const message = "value we expected " + expectedValue + " and we got " + valueWeGot + ' ' + isWorking;
+const tester = (fnToTest, input, expected, intent) => {
+  const result = fnToTest(...input);
+  const message = fmtMsg(input, result, expected, intent);
   console.log(message);
 }
 
-function testAll() {
-  testApSum(p, t, r, 21);
-  testApSum(100, 3, 10, 33.0);
-  testApSum(p, 4, 10, 46.41);
-  testApSum(p, 5, 10, 61.0);
-  testApSum(p, 6, 10, 77.1);
+
+
+const testAll = (fn) => {
+  tester(fn, [PRINCIPAL, TIME, RATE], 21, 'basic');
+  tester(fn, [100, 3, 10], 33.0, 'precision err');
+  tester(fn, [PRINCIPAL, 4, 10], 46.41, 'no precision err');
 }
 
-testAll();
+testAll(compoundFor);
