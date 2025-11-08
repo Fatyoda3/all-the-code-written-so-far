@@ -1,22 +1,25 @@
-const isWhiteSpace = (char) => [' ', '\n', '\t'].includes(char);
+const isSpace = (char) => (['-', '\n', '\t'].includes(char));
 
-function trim(sentence) {
-  let finalText = '';
-  let spaceBuffer = '';
+function trim(text = '') {
+  let front = 0;
+  let rear = text.length - 1;
+  let isFSpace = isSpace(text[front]);
+  let isRSpace = isSpace(text[rear]);
 
-  for (let index = 0; index < sentence.length; index++) {
-    const char = sentence[index];
-    const isLetter = !isWhiteSpace(char);
+  while (isFSpace || isRSpace) {
 
-    if (isLetter) {
-      finalText += spaceBuffer + char;
-      spaceBuffer = '';
-    } else if (finalText !== "") {
-      spaceBuffer += char;
+    isFSpace = isSpace(text[front]);
+    isRSpace = isSpace(text[rear]);
+    if (isFSpace) {
+      front++;
     }
+    if (isRSpace) {
+      rear--;
+    }
+
   }
 
-  return finalText;
+  return text.slice(front, rear + 1);
 }
 
 function testRevString(input, expectedValue) {
@@ -31,10 +34,11 @@ function testRevString(input, expectedValue) {
 
 function testAll() {
   testRevString('hello is\t', 'hello is');
-  testRevString(' red\t is blue', 'red\t is blue');
-  testRevString('red is blue ', 'red is blue');
-  testRevString('    \t\n\t\n ', '');
-  testRevString(' ', '');
+  testRevString('-red\t is blue', 'red\t is blue');
+  testRevString('----red is blue---', 'red is blue');
+  testRevString('----', '');
+  testRevString('-', '');
+  testRevString('-he', 'he');
 }
 
 testAll();
