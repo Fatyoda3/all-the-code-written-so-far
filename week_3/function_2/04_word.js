@@ -1,4 +1,4 @@
-const isSpace = char => (' ' === char);
+const isSpace = char => ' ' === char;
 function countWords(sentence) {
   let count = 0;
 
@@ -14,11 +14,12 @@ function countWords(sentence) {
       isLastSpace = false;
     }
     if (letterFound && res && !isLastSpace) {
+      letterFound = false;
       isLastSpace = true;
       count += 1;
     }
   }
-  return count;
+  return letterFound ? count + 1 : count;
 }
 
 function testCountWords(input, expectedValue) {
@@ -33,6 +34,8 @@ function testCountWords(input, expectedValue) {
 
 function testAll() {
   testCountWords(' red is ', 2);
+  testCountWords('red', 1);
+  testCountWords('', 0);
   testCountWords(' red is blue  ', 3);
   testCountWords(' red is   blue  ', 3);
   testCountWords(' red    is blue  ', 3);
