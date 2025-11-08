@@ -6,29 +6,28 @@ function maxSequence(string) {
   let count = 1;
   let frequency = 0;
 
-  let currentLetter = '';
+  let FrequentChar = '';
   let lastLetter = '';
 
   for (let index = 0; index < string.length; index++) {
     let delta = 1;
-
-    if (currentLetter !== string[index]) {
-
-      if (frequency < count) {
-        frequency = count;
-        lastLetter = currentLetter;
-
-        count = 1;
-      }
-
-      currentLetter = string[index];
+    const check = FrequentChar !== string[index];
+    if (check && frequency < count) {
+      frequency = count;
+      lastLetter = FrequentChar;
+      count = 1;
+    }
+    if (check) {
+      FrequentChar = string[index];
       delta = 0;
     }
+
+
 
     count += delta;
   }
 
-  const frag = (lastLetter !== '') ? lastLetter : currentLetter;
+  const frag = (lastLetter !== '') ? lastLetter : FrequentChar;
 
   return Math.max(frequency, count) + frag;
 }
