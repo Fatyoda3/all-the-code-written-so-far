@@ -1,25 +1,24 @@
-const n = 3;
 
-function fibonacciSeries(n) {
-  n = (n === 0) ? 1 : n;
+const fibsUpto = (n) => {
 
-  let a = 0;
-  let b = 1;
-  let nextFib = 0;
-  let fibString = '';
+  let currentFib = 0;
+  let nextFib = 1;
+  let futureFib = 0;
 
-  for (let current = 1; current <= n; current++) {
-    nextFib = a + b;
-    fibString = fibString + a + ' ';
-    a = b;
-    b = nextFib;
+  const fibs = [];
+
+  for (let term = 0; term < n; term++) {
+    fibs.push(currentFib);
+    futureFib = currentFib + nextFib;
+    currentFib = nextFib;
+    nextFib = futureFib;
   }
-  
-  return fibString;
+
+  return fibs.join(' ');
 }
 
-function testFibonacciSeries(n, expectedValue) {
-  const valueWeGot = fibonacciSeries(n);
+function testFibs(n, expectedValue) {
+  const valueWeGot = fibsUpto(n);
 
   const symbol = valueWeGot === expectedValue ? '✅' : '❌';
   const message = symbol === '✅' ? 'it works' : 'it fails';
@@ -27,13 +26,13 @@ function testFibonacciSeries(n, expectedValue) {
   console.log(message, symbol, valueWeGot, ':', expectedValue);
 }
 
-function testAll()
-{
-testFibonacciSeries(0, '0 ');
-testFibonacciSeries(1, '0 ');
-testFibonacciSeries(2, '0 1 ');
-testFibonacciSeries(3, '0 1 1 ');
-testFibonacciSeries(10, '0 1 1 2 3 5 8 13 21 34 ');
+function testAll() {
+  // testFibs(0, '0');//not valid test case considering
+  //  that we 1st fib is 0 and 0th fib is not defined
+  testFibs(1, '0');
+  testFibs(2, '0 1');
+  testFibs(3, '0 1 1');
+  testFibs(10, '0 1 1 2 3 5 8 13 21 34');
 }
 
 testAll();
