@@ -1,20 +1,20 @@
-function palindromeChecker(n) {
+const isPalindrome = (number) => {
 
-  let palindrome = n;
-  let reverse = 0;
+  let digits = number;
+  let reversed = 0;
 
-  while (palindrome) {
-    const remainder = palindrome % 10;
-    reverse = reverse * 10 + remainder;
-    palindrome = (palindrome - remainder) / 10;
+  while (digits) {
+    const extractedDigit = digits % 10;
+    reversed = reversed * 10 + extractedDigit;
+    digits = (digits - extractedDigit) / 10;
   }
 
-  return n === reverse;
+  return number === reversed;
 }
 
 
 function testIsPrime(value, expectedValue) {
-  const valueWeGot = palindromeChecker(value);
+  const valueWeGot = isPalindrome(value);
   const exp = valueWeGot === expectedValue ? '✅' : '❌';
   const message = valueWeGot ? 'it works' : 'it fails';
   console.log(message, exp, value, valueWeGot, ':', expectedValue);

@@ -1,4 +1,4 @@
-function fibonacciAt(n) {
+const fibonacciOf = (n) => {
   let currentTerm = 0;
   let nextTerm = 1;
   let futureTerm = 0;
@@ -12,8 +12,8 @@ function fibonacciAt(n) {
   return currentTerm;
 }
 
-function testFibonacciAt(value, expected) {
-  const output = fibonacciAt(value);
+function tester(value, expected) {
+  const output = fibonacciOf(value);
   const works = output === expected
   const exp = works ? '✅' : '❌';
   const message = works ? 'it works' : 'it fails';
@@ -22,11 +22,11 @@ function testFibonacciAt(value, expected) {
 }
 
 function testAll() {
-  testFibonacciAt(1, 0);
-  testFibonacciAt(0, 0);
-  testFibonacciAt(5, 3);
-  testFibonacciAt(2, 1);
-  testFibonacciAt(10, 34);
+  tester(1, 0);
+  tester(0, 0);
+  tester(5, 3);
+  tester(2, 1);
+  tester(10, 34);
 }
 
 testAll();
