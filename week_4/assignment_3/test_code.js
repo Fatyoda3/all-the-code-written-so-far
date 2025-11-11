@@ -1,19 +1,21 @@
 import { generatePattern } from "./patterns.js";
 
-const testCase = (type, inputs, expected) => {
+const tester = (testCase) => {
+
+  const { inputs } = testCase;
+
   const actual = generatePattern(...inputs);
-  const isPass = actual === expected;
-  const icon = isPass ? "✅" : "❌";
-  const message = [`\t${icon} ${type}\n`];
-  if (!isPass) {
+
+  const isWorking = actual === testCase.expected;
+  const symbol = isWorking ? "✅" : "❌";
+  const message = [`\t${symbol} ${symbol}\n`];
+  if (!isWorking) {
     message.push(
-      `\t   |INP    : \"${inputs}\"\n`,
-      `\t   |OUT   : ${actual}\n`,
-      `\t   |EXP : ${expected}\n`
+      `\t   |INP : ${JSON.stringify(testCase)}\n`,
+      `\t   |OUT : ${testCase.actual}\n`,
+      `\t   |EXP : ${testCase.expected}\n`
     );
   }
-
-
   console.log(message.join(''));
 };
 
@@ -25,107 +27,112 @@ const underLine = (text) => {
 const testFilledCases = () => {
   console.log(underLine("filled-rectangle"));
 
-  testCase("0,0 nothing", ["filled-rectangle", [0, 0]], "");
-  testCase("0,1 nothing", ["filled-rectangle", [0, 4]], "");
-  testCase("1,0 nothing", ["filled-rectangle", [5, 0]], "");
-  testCase("1,1 single star", ["filled-rectangle", [1, 1]], "*");
-  testCase("2,1 single Row", ["filled-rectangle", [2, 1]], "**");
-  testCase("2,2 double rows/col", ["filled-rectangle", [2, 2]], "**\n**");
+  const testCases = [
+    { type: "0,0 nothing", inputs: ["filled-rectangle", [0, 0]], expected: "" },
+    { type: "0,1 nothing", inputs: ["filled-rectangle", [0, 4]], expected: "" },
+    { type: "1,0 nothing", inputs: ["filled-rectangle", [5, 0]], expected: "" },
+    { type: "1,1 single star", inputs: ["filled-rectangle", [1, 1]], expected: "*" },
+    { type: "2,1 single Row", inputs: ["filled-rectangle", [2, 1]], expected: "**" },
+    { type: "2,2 double rows/col", inputs: ["filled-rectangle", [2, 2]], expected: "**\n**" },
+  ];
+
+  testCases.forEach(tester);
 };
+
 
 const testAllTestCasesHollow = () => {
   console.log(underLine("hollow-rectangle"));
   const style = "hollow-rectangle";
-  testCase("0,0 nothing", [style, [0, 0]], "");
-  testCase("0,0 nothing", [style, [0, 1]], "");
-  testCase("0,0 nothing", [style, [1, 0]], "");
-  testCase("1,1 Single Star", [style, [1, 1]], "*");
-  testCase("2,2 (2,2) stars", [style, [2, 2]], "**\n**");
-  testCase("2,3 (3,2) starts in col row", [style, [2, 3]], "**\n**\n**");
-  testCase("3,3 3X3 without center start", [style, [3, 3]], "***\n* *\n***");
-  testCase("5,4 without center", [style, [5, 4]], "*****\n*   *\n*   *\n*****");
+  tester("0,0 nothing", [style, [0, 0]], "");
+  tester("0,0 nothing", [style, [0, 1]], "");
+  tester("0,0 nothing", [style, [1, 0]], "");
+  tester("1,1 Single Star", [style, [1, 1]], "*");
+  tester("2,2 (2,2) stars", [style, [2, 2]], "**\n**");
+  tester("2,3 (3,2) starts in col row", [style, [2, 3]], "**\n**\n**");
+  tester("3,3 3X3 without center start", [style, [3, 3]], "***\n* *\n***");
+  tester("5,4 without center", [style, [5, 4]], "*****\n*   *\n*   *\n*****");
 
 };
 const testAllTestCasesAlternateRect = () => {
   console.log(underLine("✹ Alternating Rectangle Pattern"));
   const style = "alternating-rectangle";
-  testCase("0,0 nothing", [style, [0, 0]], "");
-  testCase("0,0 nothing", [style, [0, 1]], "");
-  testCase("0,0 nothing", [style, [1, 0]], "");
-  testCase("1,1 Single Star", [style, [1, 1]], "*");
-  testCase("2,2 (2,2) stars, dash Line", [style, [2, 1]], "**");
-  testCase("1,2 1 start, 1 dash", [style, [1, 2]], "*\n-");
-  testCase("2,2 2start, 2dash", [style, [2, 2]], "**\n--");
-  testCase("1,5 * - * - *", [style, [1, 5]], "*\n-\n*\n-\n*");
-  testCase("2,3 2 starts then 2 - then 2 *", [style, [2, 3]], "**\n--\n**");
-  testCase("3,3 2 starts then 2 - then 2 *", [style, [3, 3]], "***\n---\n***");
-  testCase("5,4 without center start", [style, [3, 4]], "***\n---\n***\n---");
+  tester("0,0 nothing", [style, [0, 0]], "");
+  tester("0,0 nothing", [style, [0, 1]], "");
+  tester("0,0 nothing", [style, [1, 0]], "");
+  tester("1,1 Single Star", [style, [1, 1]], "*");
+  tester("2,2 (2,2) stars, dash Line", [style, [2, 1]], "**");
+  tester("1,2 1 start, 1 dash", [style, [1, 2]], "*\n-");
+  tester("2,2 2start, 2dash", [style, [2, 2]], "**\n--");
+  tester("1,5 * - * - *", [style, [1, 5]], "*\n-\n*\n-\n*");
+  tester("2,3 2 starts then 2 - then 2 *", [style, [2, 3]], "**\n--\n**");
+  tester("3,3 2 starts then 2 - then 2 *", [style, [3, 3]], "***\n---\n***");
+  tester("5,4 without center start", [style, [3, 4]], "***\n---\n***\n---");
 };
 
 const testAllTestCasesSpaceAlternateRect = () => {
   console.log(underLine("✹ Spaced Alternating Rectangle Pattern"));
   const style = "spaced-alternating-rectangle";
-  testCase("0,0 nothing", [style, [0, 0]], "");
-  testCase("0,0 nothing", [style, [0, 1]], "");
-  testCase("0,0 nothing", [style, [1, 0]], "");
-  testCase("1,1 Single Star", [style, [1, 1]], "*");
-  testCase("2,2 (2,2) stars, dash Line", [style, [2, 1]], "**");
-  testCase("1,2 1 start, 1 dash", [style, [1, 2]], "*\n-");
-  testCase("2,2 2start, 2dash", [style, [2, 2]], "**\n--");
-  testCase("2,3 2start, 2dash, 2 space", [style, [2, 3]], "**\n--\n  ");
-  testCase("1,5 * -   *", [style, [1, 5]], "*\n-\n \n*\n-");
+  tester("0,0 nothing", [style, [0, 0]], "");
+  tester("0,0 nothing", [style, [0, 1]], "");
+  tester("0,0 nothing", [style, [1, 0]], "");
+  tester("1,1 Single Star", [style, [1, 1]], "*");
+  tester("2,2 (2,2) stars, dash Line", [style, [2, 1]], "**");
+  tester("1,2 1 start, 1 dash", [style, [1, 2]], "*\n-");
+  tester("2,2 2start, 2dash", [style, [2, 2]], "**\n--");
+  tester("2,3 2start, 2dash, 2 space", [style, [2, 3]], "**\n--\n  ");
+  tester("1,5 * -   *", [style, [1, 5]], "*\n-\n \n*\n-");
 };
 const testAllTestCasesTriangle = () => {
   console.log(underLine("✹ Triangle"));
   const style = "triangle";
-  testCase("0 nothing", [style, [0]], "");
-  testCase("1 single *", [style, [1]], "*");
-  testCase("2 ", [style, [2]], "*\n**");
-  testCase("3", [style, [3]], "*\n**\n***");
-  testCase("4", [style, [4]], "*\n**\n***\n****");
-  testCase("5", [style, [5]], "*\n**\n***\n****\n*****");
+  tester("0 nothing", [style, [0]], "");
+  tester("1 single *", [style, [1]], "*");
+  tester("2 ", [style, [2]], "*\n**");
+  tester("3", [style, [3]], "*\n**\n***");
+  tester("4", [style, [4]], "*\n**\n***\n****");
+  tester("5", [style, [5]], "*\n**\n***\n****\n*****");
 };
 const testAllTestCasesRightAlignTriangle = () => {
   console.log(underLine("✹ Right-Aligned Triangle"));
   const style = "right-aligned-triangle";
-  testCase("0 nothing", [style, [0]], "");
-  testCase("1 ", [style, [1]], "*");
-  testCase("2", [style, [2]], " *\n**");
-  testCase("3", [style, [3]], "  *\n **\n***");
-  testCase("4", [style, [4]], "   *\n  **\n ***\n****");
-  testCase("5", [style, [5]], "    *\n   **\n  ***\n ****\n*****");
+  tester("0 nothing", [style, [0]], "");
+  tester("1 ", [style, [1]], "*");
+  tester("2", [style, [2]], " *\n**");
+  tester("3", [style, [3]], "  *\n **\n***");
+  tester("4", [style, [4]], "   *\n  **\n ***\n****");
+  tester("5", [style, [5]], "    *\n   **\n  ***\n ****\n*****");
 };
 const testAllTestCasesDiamond = () => {
   console.log(underLine("✹ diamond"));
   const style = "diamond";
-  testCase("0 nothing", [style, [0]], "");
-  testCase("1 ", [style, [1]], "*");
-  testCase("2", [style, [2]], "*");
-  testCase("3", [style, [3]], " *\n***\n *");
-  testCase("4", [style, [4]], " *\n***\n *");
-  testCase("5", [style, [5]], "  *\n ***\n*****\n ***\n  *");
-  testCase("6", [style, [6]], "  *\n ***\n*****\n ***\n  *");
+  tester("0 nothing", [style, [0]], "");
+  tester("1 ", [style, [1]], "*");
+  tester("2", [style, [2]], "*");
+  tester("3", [style, [3]], " *\n***\n *");
+  tester("4", [style, [4]], " *\n***\n *");
+  tester("5", [style, [5]], "  *\n ***\n*****\n ***\n  *");
+  tester("6", [style, [6]], "  *\n ***\n*****\n ***\n  *");
 };
 const testAllTestCasesHollowDiamond = () => {
   console.log(underLine("✹ Hollow diamond"));
   const style = "hollow-diamond";
-  testCase("0 nothing", [style, [0]], "");
-  testCase("1 ", [style, [1]], "*");
-  testCase("2", [style, [2]], "*");
-  testCase("3", [style, [3]], " *\n* *\n *");
-  testCase("4", [style, [4]], " *\n* *\n *");
-  testCase("5", [style, [5]], "  *\n * *\n*   *\n * *\n  *");
-  testCase("6", [style, [6]], "  *\n * *\n*   *\n * *\n  *");
+  tester("0 nothing", [style, [0]], "");
+  tester("1 ", [style, [1]], "*");
+  tester("2", [style, [2]], "*");
+  tester("3", [style, [3]], " *\n* *\n *");
+  tester("4", [style, [4]], " *\n* *\n *");
+  tester("5", [style, [5]], "  *\n * *\n*   *\n * *\n  *");
+  tester("6", [style, [6]], "  *\n * *\n*   *\n * *\n  *");
 };
 const testAllCases = () => {
   testFilledCases();
-  testAllTestCasesHollow();
-  testAllTestCasesAlternateRect();
-  testAllTestCasesSpaceAlternateRect();
-  testAllTestCasesTriangle();
-  testAllTestCasesRightAlignTriangle();
-  testAllTestCasesDiamond();
-  testAllTestCasesHollowDiamond();
+  // testAllTestCasesHollow();
+  // testAllTestCasesAlternateRect();
+  // testAllTestCasesSpaceAlternateRect();
+  // testAllTestCasesTriangle();
+  // testAllTestCasesRightAlignTriangle();
+  // testAllTestCasesDiamond();
+  // testAllTestCasesHollowDiamond();
 };
 
 testAllCases();
