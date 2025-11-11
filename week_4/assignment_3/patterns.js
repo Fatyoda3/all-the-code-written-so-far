@@ -1,66 +1,66 @@
 const generateLine = (string, count) => {
   const pattern = [];
-
   for (let term = 0; term < count; term++) {
     pattern.push(string);
   }
   return pattern.join('');
 };
 const hollowRectangle = (rows, columns) => {
-
   if (rows === 1) {
     return generateLine('*', columns);
-  } else if (columns === 1) {
+  }
+  if (columns === 1) {
     return generateLine('*\n', rows);
   }
 
-  let pattern = '';
+  const pattern = [];
 
   const temp = generateLine('*', columns - 1);
   const trailPart = '*\n*';
-  pattern += temp + trailPart;
   const hollowPart = generateLine(' ', columns - 2) + trailPart;
-  pattern += generateLine(hollowPart, rows - 2) + temp;
+  pattern.push(temp + trailPart,
+    generateLine(hollowPart, rows - 2) + temp);
 
-  return pattern;
+  return pattern.join('');
 };
 const filledRectangle = (rows, columns) => {
   return generateLine(generateLine('*', columns) + '\n', rows);
 };
 const alternatingRectangle = (rows, columns) => {
-  let pattern = '';
+  const pattern = [];
   let bool = true;
+
   for (let index = 1; index <= rows; index++) {
     if (bool) {
-      pattern += generateLine('*', columns);
+      pattern.push(generateLine('*', columns));
       bool = false;
     }
     else {
-      pattern += generateLine('-', columns);
+      pattern.push(generateLine('-', columns));
       bool = true;
     }
-    pattern += '\n';
+    pattern.push('\n');
   }
-  return pattern;
+  return pattern.join('');
 };
 const triangle = (row) => {
-  let pattern = '';
+  const pattern = [];
   for (let index = 0; index < row; index++) {
-    pattern += (generateLine('*', index + 1) + '\n');
+    pattern.push((generateLine('*', index + 1)));
   }
-  return pattern;
+  return pattern.join('\n');
 };
 const rightAlign = (row) => {
-  let pattern = '';
+  const pattern = [];
 
   for (let index = 1; index <= row; index++) {
-    pattern += generateLine(' ', row - index);
-    pattern += generateLine('*', index) + "\n";
+    pattern.push(generateLine(' ', row - index));
+    pattern.push(generateLine('*', index) + '\n');
   }
-  return pattern;
+  return pattern.join('');
 };
 const spacedAlternatingRectangle = (rows, columns) => {
-  let pattern = '';
+  const pattern = [];
 
   const starRows = generateLine('*', columns);
   const hyphenRows = generateLine('-', columns);
@@ -70,42 +70,42 @@ const spacedAlternatingRectangle = (rows, columns) => {
   let counter = 0;
 
   for (let index = 0; index < rows; index += 1) {
-    pattern += patterns[counter] + '\n';
+    let delta = 1;
+    pattern.push(patterns[counter] + '\n');
 
     if (counter === 2) {
       counter = 0;
-    }
-    else {
-      counter++;
+      delta = 0;
     }
 
+    counter += delta;
+
   }
-  return pattern;
+  return pattern.join('');
 
 };
 const diamond = (givenSize) => {
-  let pattern = '';
-  const size = givenSize - (!(givenSize % 2));
+  const pattern = [];
+  const size = givenSize % 2 === 0 ? givenSize - 1 : givenSize;
 
   const middleRow = size / 2;
   const uptoOrFrom = Math.floor(middleRow);
 
   for (let index = 0; index < uptoOrFrom; index++) {
-    pattern += generateLine(' ', (middleRow - index - 1));
-    pattern += generateLine('*', 2 * index + 1) + '\n';
+    pattern.push(generateLine(' ', (middleRow - index - 1)));
+    pattern.push(generateLine('*', 2 * index + 1) + '\n');
   }
-  pattern += (generateLine('*', size)) + '\n';
-
+  pattern.push((generateLine('*', size)) + '\n');
   for (let index = uptoOrFrom - 1; index >= 0; index--) {
-    pattern += generateLine(' ', (middleRow - index - 1));
-    pattern += generateLine('*', 2 * index + 1) + '\n';
+    pattern.push(generateLine(' ', (middleRow - index - 1)));
+    pattern.push(generateLine('*', 2 * index + 1) + '\n');
   }
 
-  return pattern;
+  return pattern.join('');
 };
 const hollowDiamond = (givenSize) => {
-  let pattern = '';
-  const size = givenSize - (!(givenSize % 2));
+  const pattern = [];
+  const size = givenSize % 2 === 0 ? givenSize - 1 : givenSize;
 
   const middleRow = size / 2;
   const uptoOrFrom = Math.floor(middleRow);
@@ -115,19 +115,21 @@ const hollowDiamond = (givenSize) => {
   }
 
   let special = '';
+
   for (let index = 0; index < uptoOrFrom; index++) {
-    pattern += generateLine(' ', (middleRow - index - 1));
-    pattern += '*' + generateLine(' ', 2 * index - 1) + special + '\n';
+    pattern.push(generateLine(' ', (middleRow - index - 1)));
+    pattern.push('*' + generateLine(' ', 2 * index - 1) + special + '\n');
     special = '*';
   }
-  pattern += '*' + (generateLine(' ', size - 2)) + '*\n';
+  pattern.push('*' + (generateLine(' ', size - 2)) + '*\n');
   for (let index = uptoOrFrom - 1; index >= 1; index--) {
-    pattern += generateLine(' ', (middleRow - index - 1));
-    pattern += '*' + generateLine(' ', 2 * index - 1) + '*\n';
+    pattern.push(generateLine(' ', (middleRow - index - 1)));
+    pattern.push('*' + generateLine(' ', 2 * index - 1) + '*\n');
   }
-  pattern += (generateLine(' ', size / 2 - 1)) + '*\n';
 
-  return pattern;
+  pattern.push((generateLine(' ', size / 2 - 1)) + '*\n');
+
+  return pattern.join('');
 };
 
 export const generatePattern = (style, dimensions) => {

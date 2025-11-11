@@ -4,19 +4,22 @@ const testCase = (type, inputs, expected) => {
   const actual = generatePattern(...inputs);
   const isPass = actual === expected;
   const icon = isPass ? "✅" : "❌";
-  let message = `\t${icon} ${type}\n`;
+  const message = [`\t${icon} ${type}\n`];
+  if (!isPass) {
+    message.push(
+      `\t   |INP    : \"${inputs}\"\n`,
+      `\t   |OUT   : ${actual}\n`,
+      `\t   |EXP : ${expected}\n`
+    );
+  }
 
-  message += isPass ? "" : `\t   | Input    : \"${inputs}\"\n`;
-  message += isPass ? "" : `\t   | Actual   : \n${actual}\n`;
-  message += isPass ? "" : `\t   | Expected : \n${expected}\n`;
 
-  console.log(message);
+  console.log(message.join(''));
 };
 
-const underLine = (description) => {
-  const printingDescription = "\n\t" + description;
-  const underScores = "\n\t" + "_".repeat(description.length) + "\n";
-  return printingDescription + underScores + "\n";
+const underLine = (text) => {
+  const underScores = "\n\t" + "_".repeat(text.length) + "\n";
+  return "\t" + text + underScores + "\n";
 };
 
 const testFilledCases = () => {
