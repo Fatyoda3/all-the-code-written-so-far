@@ -1,3 +1,14 @@
+import {
+  FILL_RECT,
+  HOLLOW_RECT,
+  ALT_RECT,
+  SPACE_ALTER_RECT,
+  TRIANGLE,
+  RT_TRIANGLE,
+  DIAMOND,
+  HOLLOW_DIAMOND
+} from './constants.js';
+
 const generateLine = (string, count) => {
   const pattern = [];
   for (let term = 0; term < count; term++) {
@@ -5,6 +16,7 @@ const generateLine = (string, count) => {
   }
   return pattern.join('');
 };
+
 const hollowRectangle = (rows, columns) => {
   if (rows === 1) {
     return generateLine('*', columns);
@@ -133,7 +145,6 @@ const hollowDiamond = (givenSize) => {
 };
 
 export const generatePattern = (style, dimensions) => {
-
   const columns = dimensions[0];
   const rows = dimensions[1];
 
@@ -143,21 +154,21 @@ export const generatePattern = (style, dimensions) => {
 
   let pattern = '';
 
-  if (style === "triangle") {
+  if (style === TRIANGLE) {
     pattern = triangle(columns);
-  } else if (style === "hollow-diamond") {
+  } else if (style === HOLLOW_DIAMOND) {
     pattern = hollowDiamond(columns);
-  } else if (style === "diamond") {
+  } else if (style === DIAMOND) {
     pattern = diamond(columns);
-  } else if (style === 'right-aligned-triangle') {
+  } else if (style === RT_TRIANGLE) {
     pattern = rightAlign(columns);
-  } else if (style === "hollow-rectangle") {
+  } else if (style === HOLLOW_RECT) {
     pattern = hollowRectangle(rows, columns);
-  } else if (style === "filled-rectangle") {
+  } else if (style === FILL_RECT) {
     pattern = filledRectangle(rows, columns);
-  } else if (style === "alternating-rectangle") {
+  } else if (style === ALT_RECT) {
     pattern = alternatingRectangle(rows, columns);
-  } else if (style === "spaced-alternating-rectangle") {
+  } else if (style === SPACE_ALTER_RECT) {
     pattern = spacedAlternatingRectangle(rows, columns);
   }
   const len = pattern.length;
