@@ -129,6 +129,7 @@ const hollowDiamond = (givenSize) => {
 
   return pattern;
 };
+
 export const generatePattern = (style, dimensions) => {
 
   const columns = dimensions[0];
