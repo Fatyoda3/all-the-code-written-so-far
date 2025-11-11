@@ -1,11 +1,8 @@
 import { generatePattern } from "./patterns.js";
 
 const tester = (testCase) => {
-
   const { inputs } = testCase;
-
   const actual = generatePattern(...inputs);
-
   const isWorking = actual === testCase.expected;
   const symbol = isWorking ? "✅" : "❌";
   const message = [`\t${symbol} ${testCase.type}\n`];
@@ -26,14 +23,14 @@ const underLine = (text) => {
 
 const testFilledCases = () => {
   console.log(underLine("filled-rectangle"));
-
+  const FILL_RECT = "filled-rectangle";
   const testCases = [
-    { type: "0,0 nothing", inputs: ["filled-rectangle", [0, 0]], expected: "" },
-    { type: "0,1 nothing", inputs: ["filled-rectangle", [0, 4]], expected: "" },
-    { type: "1,0 nothing", inputs: ["filled-rectangle", [5, 0]], expected: "" },
-    { type: "1,1 single star", inputs: ["filled-rectangle", [1, 1]], expected: "*" },
-    { type: "2,1 single Row", inputs: ["filled-rectangle", [2, 1]], expected: "**" },
-    { type: "2,2 double rows/col", inputs: ["filled-rectangle", [2, 2]], expected: "**\n**" },
+    { type: "0,0 nothing", inputs: [FILL_RECT, [0, 0]], expected: "" },
+    { type: "0,1 nothing", inputs: [FILL_RECT, [0, 4]], expected: "" },
+    { type: "1,0 nothing", inputs: [FILL_RECT, [5, 0]], expected: "" },
+    { type: "1,1 single star", inputs: [FILL_RECT, [1, 1]], expected: "*" },
+    { type: "2,1 single Row", inputs: [FILL_RECT, [2, 1]], expected: "**" },
+    { type: "2,2 double rows/col", inputs: [FILL_RECT, [2, 2]], expected: "**\n**" },
   ];
 
   testCases.forEach(tester);
@@ -57,21 +54,21 @@ const testAllTestCasesHollow = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesAlternateRect = () => {
-  const ALTERNATING_RECTANGLE = "alternating-rectangle";
+  const ALT_RECT = "alternating-rectangle";
   console.log(underLine("✹ Alternating Rectangle Pattern"));
 
   const testCases = [
-    { type: "0,0 nothing", inputs: [ALTERNATING_RECTANGLE, [0, 0]], expected: "" },
-    { type: "0,1 nothing", inputs: [ALTERNATING_RECTANGLE, [0, 1]], expected: "" },
-    { type: "1,0 nothing", inputs: [ALTERNATING_RECTANGLE, [1, 0]], expected: "" },
-    { type: "1,1 Single Star", inputs: [ALTERNATING_RECTANGLE, [1, 1]], expected: "*" },
-    { type: "2,1 (2,1) stars, dash Line", inputs: [ALTERNATING_RECTANGLE, [2, 1]], expected: "**" },
-    { type: "1,2 1 start, 1 dash", inputs: [ALTERNATING_RECTANGLE, [1, 2]], expected: "*\n-" },
-    { type: "2,2 2start, 2dash", inputs: [ALTERNATING_RECTANGLE, [2, 2]], expected: "**\n--" },
-    { type: "1,5 * - * - *", inputs: [ALTERNATING_RECTANGLE, [1, 5]], expected: "*\n-\n*\n-\n*" },
-    { type: "2,3 2 starts then 2 - then 2 *", inputs: [ALTERNATING_RECTANGLE, [2, 3]], expected: "**\n--\n**" },
-    { type: "3,3 3 starts, then 3 -, then 3 *", inputs: [ALTERNATING_RECTANGLE, [3, 3]], expected: "***\n---\n***" },
-    { type: "3,4 3 starts, then 3 -, repeat", inputs: [ALTERNATING_RECTANGLE, [3, 4]], expected: "***\n---\n***\n---" },
+    { type: "0,0 nothing", inputs: [ALT_RECT, [0, 0]], expected: "" },
+    { type: "0,1 nothing", inputs: [ALT_RECT, [0, 1]], expected: "" },
+    { type: "1,0 nothing", inputs: [ALT_RECT, [1, 0]], expected: "" },
+    { type: "1,1 Single Star", inputs: [ALT_RECT, [1, 1]], expected: "*" },
+    { type: "2,1 (2,1) stars, dash Line", inputs: [ALT_RECT, [2, 1]], expected: "**" },
+    { type: "1,2 1 start, 1 dash", inputs: [ALT_RECT, [1, 2]], expected: "*\n-" },
+    { type: "2,2 2start, 2dash", inputs: [ALT_RECT, [2, 2]], expected: "**\n--" },
+    { type: "1,5 * - * - *", inputs: [ALT_RECT, [1, 5]], expected: "*\n-\n*\n-\n*" },
+    { type: "2,3 2 starts then 2 - then 2 *", inputs: [ALT_RECT, [2, 3]], expected: "**\n--\n**" },
+    { type: "3,3 3 starts, then 3 -, then 3 *", inputs: [ALT_RECT, [3, 3]], expected: "***\n---\n***" },
+    { type: "3,4 3 starts, then 3 -, repeat", inputs: [ALT_RECT, [3, 4]], expected: "***\n---\n***\n---" },
   ];
 
   testCases.forEach(tester);
