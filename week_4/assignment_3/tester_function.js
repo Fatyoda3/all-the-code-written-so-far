@@ -8,7 +8,7 @@ export const tester = (testCase) => {
   const message = [`\t${symbol} ${testCase.type}\n`];
   if (!isWorking) {
     message.push(
-      `\t   |INP : ${JSON.stringify(testCase)}\n`,
+      `\t   |INP : ${(testCase)}\n`,
       `\t   |OUT : ${testCase.actual}\n`,
       `\t   |EXP : ${testCase.expected}\n`
     );

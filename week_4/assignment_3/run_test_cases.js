@@ -15,7 +15,7 @@ const underLine = (text) => {
 };
 
 const testFilledCases = () => {
-  console.log(underLine("filled-rectangle"));
+  console.log(underLine(FILL_RECT));
   const testCases = [
     {
       type: "0,0 nothing",
@@ -52,7 +52,7 @@ const testFilledCases = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesHollow = () => {
-  console.log(underLine("hollow-rectangle"));
+  console.log(underLine(HOLLOW_RECT));
 
   const testCases = [
     {
@@ -100,7 +100,7 @@ const testAllTestCasesHollow = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesAlternateRect = () => {
-  console.log(underLine("✹ Alternating Rectangle Pattern"));
+  console.log(underLine(ALT_RECT));
 
   const testCases = [
     {
@@ -163,7 +163,7 @@ const testAllTestCasesAlternateRect = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesSpaceAlternateRect = () => {
-  console.log(underLine("✹ Spaced Alternating Rectangle Pattern"));
+  console.log(underLine(SPACE_ALTER_RECT));
 
   const testCases = [
     { type: "0,0 nothing", inputs: [SPACE_ALTER_RECT, [0, 0]], expected: "" },
@@ -180,7 +180,7 @@ const testAllTestCasesSpaceAlternateRect = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesTriangle = () => {
-  console.log(underLine("✹ Triangle"));
+  console.log(underLine(TRIANGLE));
 
   const testCases = [
     { type: "0 nothing", inputs: [TRIANGLE, [0]], expected: "" },
@@ -194,7 +194,7 @@ const testAllTestCasesTriangle = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesRightAlignTriangle = () => {
-  console.log(underLine("✹ Right-Aligned Triangle"));
+  console.log(underLine(RT_TRIANGLE));
 
   const testCases = [
     { type: "0 nothing", inputs: [RT_TRIANGLE, [0]], expected: "" },
@@ -208,7 +208,7 @@ const testAllTestCasesRightAlignTriangle = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesDiamond = () => {
-  console.log(underLine("✹ Diamond"));
+  console.log(underLine(DIAMOND));
 
   const testCases = [
     { type: "0 nothing", inputs: [DIAMOND, [0]], expected: "" },
@@ -223,7 +223,7 @@ const testAllTestCasesDiamond = () => {
   testCases.forEach(tester);
 };
 const testAllTestCasesHollowDiamond = () => {
-  console.log(underLine("✹ Hollow Diamond"));
+  console.log(underLine(HOLLOW_DIAMOND));
 
   const testCases = [
     { type: "0 nothing", inputs: [HOLLOW_DIAMOND, [0]], expected: "" },

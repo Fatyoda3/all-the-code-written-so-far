@@ -16,7 +16,6 @@ const generateLine = (string, count) => {
   }
   return pattern.join('');
 };
-
 const hollowRectangle = (rows, columns) => {
   if (rows === 1) {
     return generateLine('*', columns);
